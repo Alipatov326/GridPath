@@ -26,10 +26,13 @@ public class GridPath {
      * grid.
      */
     public Location getNextLoc(int row, int col) {
-        int below = grid[row + 1][col];
-        int right = grid[row][col + 1];
-        return null;
-        /* to be implemented in part (a) */ }
+        int below = Integer.MAX_VALUE;
+        if (row < grid.length - 1) below = grid[row + 1][col];
+        int right = Integer.MAX_VALUE;
+        if (col < grid[0].length - 1) right = grid[row][col + 1];
+        return new Location(below, right);
+
+    }        /* to be implemented in part (a) */
 
     /**
      * Computes and returns the sum of all values on a path through grid, as
@@ -41,6 +44,12 @@ public class GridPath {
      * grid.
      */
     public int sumPath(int row, int col) {
-        return 0;
+        int sum = grid[row][col];
+        Location loc = getNextLoc(row, col);
+        while(row < grid.length - 1 || col < grid[0].length - 1)
+            row = loc.getRow();
+            col = loc.getCol();
+            sum += grid[row][col];
+        return sum;
         /* to be implemented in part (b) */ }
 }
