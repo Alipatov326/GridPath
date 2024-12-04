@@ -27,9 +27,15 @@ public class GridPath {
      */
     public Location getNextLoc(int row, int col) {
         int below = Integer.MAX_VALUE;
-        if (row < grid.length - 1) below = grid[row + 1][col];
         int right = Integer.MAX_VALUE;
+        boolean onlyBelow = false;
+        boolean onlyRight = false;
+        if (row < grid.length - 1) below = grid[row + 1][col];
+        else onlyRight = true;
         if (col < grid[0].length - 1) right = grid[row][col + 1];
+        else onlyBelow = true;
+        if (onlyRight) return location(); //RIGHT HERE
+        if (onlyBelow) return below;
         return new Location(below, right);
 
     }        /* to be implemented in part (a) */
@@ -45,11 +51,12 @@ public class GridPath {
      */
     public int sumPath(int row, int col) {
         int sum = grid[row][col];
-        Location loc = getNextLoc(row, col);
-        while(row < grid.length - 1 || col < grid[0].length - 1)
+        while(row < grid.length - 1 || col < grid[0].length - 1) {
+            Location loc = getNextLoc(row, col);
             row = loc.getRow();
             col = loc.getCol();
             sum += grid[row][col];
+        }
         return sum;
         /* to be implemented in part (b) */ }
 }
