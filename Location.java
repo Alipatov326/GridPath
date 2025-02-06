@@ -1,9 +1,7 @@
 public class Location {
     private int theRow;
     private int theCol;
-    public String toString(){
-        return theRow + ", " + theCol;
-    }
+
     public Location(int r, int c) {
         theRow = r;
         theCol = c;
@@ -15,5 +13,9 @@ public class Location {
 
     public int getCol() {
         return theCol;
+    }
+    public String toString()
+    {
+        return theRow + ", " + theCol;
     }
 }
